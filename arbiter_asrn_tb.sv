@@ -7,8 +7,7 @@ module arbiter_asrn_tb();
     
     reg  [N-1:0] req_i;
     wire [N-1:0] gnt_o;
-    
-    
+
     
     single_cycle_arbiter #(
         .N(N)
