@@ -39,6 +39,8 @@ module single_cycle_arbiter #(
                         if (req_i[i] /* & (~ls_one) */) begin 
                         //    ls_one  = 1;
                         //  dout[i] = 1;
+                        // Left shift by N-i and then check if all bits are zero.
+                        // by using reduction NOR operator.
                             dout[i] = (~|(req_i << (N-i))) ? 1 : 0;
                         end 
                     end 
