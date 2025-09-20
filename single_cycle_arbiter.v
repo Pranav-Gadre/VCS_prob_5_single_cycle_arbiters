@@ -49,6 +49,8 @@ module single_cycle_arbiter #(
                         // this is the first occurance of "1",
                         // hence it should be "1", else "0".
                         // Unary reduction NOR operator.
+                        for (i = 1; i <= N-1; i=i+1) begin 
+                            dout[i] = ~|(req_i[(i-1):0]) ? 1 : 0;
                             dout[i] = ~|(req_i[(i-1)-:]) ? 1 : 0;
                         end 
                         */
