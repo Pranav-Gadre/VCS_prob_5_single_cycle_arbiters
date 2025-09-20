@@ -18,14 +18,12 @@ module single_cycle_arbiter #(
     generate 
         if (N == 1) begin : generate_block_1
             always_latch begin 
+                ls_one = 0;
                 if (reset) begin 
-                    ls_one = 0;
                     dout   = 0;
                 end else if (clk) begin 
-                    ls_one = ls_one;
                     dout   = req_i;
                 end else begin 
-                    ls_one = ls_one;
                     dout   = dout;
                 end 
             end 
@@ -36,24 +34,12 @@ module single_cycle_arbiter #(
                     dout   = 0;
                 end else if (clk) begin 
                     ls_one  = 0;
-                //  dout[0] = req_i[0];
                     dout    = 0;
                     for (i = 0; i <= N-1; i=i+1) begin 
                         if (req_i[i] & (~ls_one)) begin 
                             ls_one  = 1;
                             dout[i] = 1;
                         end 
-                        /*
-                        if (req_i[i]) begin 
-                        // if all the preceeding bits are "0", 
-                        // this is the first occurance of "1",
-                        // hence it should be "1", else "0".
-                        // Unary reduction NOR operator.
-                        for (i = 1; i <= N-1; i=i+1) begin 
-                            dout[i] = ~|(req_i[(i-1):0]) ? 1 : 0;
-                            dout[i] = ~|(req_i[(i-1)-:]) ? 1 : 0;
-                        end 
-                        */
                     end 
                 end else begin 
                     ls_one = ls_one;
