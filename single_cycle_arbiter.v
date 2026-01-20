@@ -17,7 +17,7 @@ module single_cycle_arbiter #(
     always @ (*) begin 
       for (i = 0; i <= N-1; i=i+1) begin 
         if (req_i[i]) begin 
-        // Left shift by (N-i) and then check if all bits are zero,
+        // Left shift by (N-i) and then check if all bits (to the RIGHT of the reference bit) are zero,
         // by using reduction NOR operator.
           dout[i] = (~|(req_i << (N-i))) ? 1 : 0;
         end else begin
