@@ -20,6 +20,7 @@ module single_cycle_arbiter #(
         // Left shift by (N-i) and then check if all bits (to the RIGHT of the reference bit) are zero,
         // by using reduction NOR operator.
           dout[i] = (~|(req_i << (N-i))) ? 1 : 0;
+        //dout[i] = ~|({req_i, {(N-i){1'b0}}}) ? 1 : 0;
         end else begin
           dout[i] = req_i[i];
         end
